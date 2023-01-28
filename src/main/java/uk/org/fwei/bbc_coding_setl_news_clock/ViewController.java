@@ -1,7 +1,5 @@
 package uk.org.fwei.bbc_coding_setl_news_clock;
 
-import java.util.Objects;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,11 +29,11 @@ public class ViewController {
 
 	// Should be Put, really
 	@GetMapping("leftTab/{state}")
-	public ModelAndView putLeftTabState(@PathVariable("state") final String newLeftTabState) {
-		if ("on".equals(newLeftTabState) || "off".equals(newLeftTabState)) {
-			final String oldLeftTabState = leftTabService.getAndSetState(newLeftTabState);
+	public ModelAndView putLeftTabState(@PathVariable("state") final String newState) {
+		if ("on".equals(newState) || "off".equals(newState)) {
+			final String oldState = leftTabService.state(newState);
 
-			if (!Objects.equals(oldLeftTabState, newLeftTabState)) {
+			if (!oldState.equals(newState)) {
 				leftTabService.invoke();
 			}
 		}
