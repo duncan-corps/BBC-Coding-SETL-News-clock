@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>View</h1>
-	<table class="table table-bordered table-striped">
+	<table class="table table-bordered table-striped" title="Left tab">
 		<thead>
 			<tr>
 				<th>Name</th>
@@ -17,12 +17,27 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>Left tab state</td>
-				<td th:text="${model.leftTabState}" />
-				<td th:switch="${model.leftTabState}">
+				<td>channel</td>
+				<td th:text="${leftTab.channel}" />
+				<td/>
+			</tr>
+			<tr>
+				<td>cgLayer</td>
+				<td th:text="${leftTab.cgLayer}" />
+				<td/>
+			</tr>
+			<tr>
+				<td>state</td>
+				<td th:text="${leftTab.state}" />
+				<td th:switch="${leftTab.state}">
 					<a th:case="'on'" th:href="@{/leftTab/off}">Switch off</a>
 					<a th:case="*" th:href="@{/leftTab/on}">Switch on</a>
 				</td>
+			</tr>
+			<tr>
+				<td>textSuffix</td>
+				<td th:text="${leftTab.textSuffix}" />
+				<td/>
 			</tr>
 		</tbody>
 	</table>

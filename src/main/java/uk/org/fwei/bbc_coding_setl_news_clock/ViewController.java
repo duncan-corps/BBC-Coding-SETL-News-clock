@@ -1,7 +1,6 @@
 package uk.org.fwei.bbc_coding_setl_news_clock;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class ViewController {
 
-	private final AtomicReference<String> leftTabState;
+	private final LeftTabService leftTabService;
 
-	public ViewController(final AtomicReference<String> leftTabState) {
-		this.leftTabState = leftTabState;
+	public ViewController(final LeftTabService leftTabService) {
+		this.leftTabService = leftTabService;
 	}
 
 	private final ModelAndView modelAndView(final String viewName) {
-		final ModelAndView modelAndView = new ModelAndView(viewName, "model", new Model(leftTabState.get()));
+		final ModelAndView modelAndView = new ModelAndView(viewName, "leftTab", leftTabService.model());
 
 		return modelAndView;
 	}
@@ -34,10 +33,10 @@ public class ViewController {
 	@GetMapping("leftTab/{state}")
 	public ModelAndView putLeftTabState(@PathVariable("state") final String newLeftTabState) {
 		if ("on".equals(newLeftTabState) || "off".equals(newLeftTabState)) {
-			final String oldLeftTabState = leftTabState.getAndSet(newLeftTabState);
+			final String oldLeftTabState = leftTabService.getAndSetState(newLeftTabState);
 
 			if (!Objects.equals(oldLeftTabState, newLeftTabState)) {
-				System.out.println("Invoke leftTab('%s'[, 'BBC News HH:MM'])".formatted(newLeftTabState));
+				leftTabService.invoke();
 			}
 		}
 
