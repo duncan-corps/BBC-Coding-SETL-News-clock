@@ -1,4 +1,4 @@
-package uk.org.fwei.bbc_coding_setl_news_clock;
+package uk.org.fwei;
 
 public record LeftTabModel(int channel, int cgLayer, String state, String textSuffix) {
 }

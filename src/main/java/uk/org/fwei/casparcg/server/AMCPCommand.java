@@ -35,6 +35,11 @@ public class AMCPCommand {
 		return cgAdd(channel, layer, cgLayer, template, playOnLoad, data);
 	}
 
+	public static String cgAdd(final int channel, final int cgLayer, final String template, final boolean playOnLoad) {
+		final String data = null;
+		return cgAdd(channel, cgLayer, template, playOnLoad, data);
+	}
+
 	// CG [video_channel:int]{-[layer:int]|-9999} INVOKE [cg_layer:int]
 	// [method:string]
 	public static String cgInvoke(final int channel, final Integer layer, final int cgLayer, final String method) {
@@ -48,5 +53,4 @@ public class AMCPCommand {
 		final Integer layer = null;
 		return cgInvoke(channel, layer, cgLayer, method);
 	}
-
 }

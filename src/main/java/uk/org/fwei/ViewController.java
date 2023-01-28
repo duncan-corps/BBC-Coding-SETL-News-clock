@@ -1,4 +1,4 @@
-package uk.org.fwei.bbc_coding_setl_news_clock;
+package uk.org.fwei;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

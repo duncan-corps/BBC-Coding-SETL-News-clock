@@ -6,9 +6,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class BBCCodingSETLNewsClock {
+public class Application {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(BBCCodingSETLNewsClock.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }
