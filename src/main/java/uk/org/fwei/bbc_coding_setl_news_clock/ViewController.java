@@ -11,11 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class MessageController {
+public class ViewController {
 
 	private final AtomicReference<String> leftTabState;
 
-	public MessageController(final AtomicReference<String> leftTabState) {
+	public ViewController(final AtomicReference<String> leftTabState) {
 		this.leftTabState = leftTabState;
 	}
 
