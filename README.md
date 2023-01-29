@@ -12,7 +12,7 @@ Further reading;
   * [Installing](https://openjdk.org/install/) (Linux-heavy)
 * [Eclipse Temurin (AKA Adoptium)](https://projects.eclipse.org/projects/adoptium.temurin/downloads)
 # Mock CasparCG Server
-Netcat can be used as a mock CasparCG Server, displaying the commands recieved and allowing you to type in responses, like this;
+On many OSes, a CLI utility like [Ncat](https://nmap.org/ncat) can be used as a mock CasparCG Server, displaying the commands recieved and allowing you to type in responses. For example;
 ```
 nc --listen 5250
 ```
