@@ -17,10 +17,10 @@ On many OSes, a CLI utility like [Ncat](https://nmap.org/ncat) can be used as a 
 nc --listen 5250
 ```
 When you see an incoming AMCP command like;
-* REQ 000000 CG 1 ADD 1 main/MAIN 1
+> REQ 000000 CG 1 ADD 1 main/MAIN 1
 
 ... then you should type a suitable response like; 
-* RES 000000 anything you like
+> RES 000000 anything you like
 
 The client code matches up the REQ and RES prefixes and the six hexadecimal digit identifier in them; the remainder of the line must be present, but is ignored. You'll see the command and response in the output of the control app.
 # The control app
