@@ -31,9 +31,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Client implements Closeable {
 
-	// Format REQ and RES identifiers as 6 hexadecimal digits, zero padded, to cover
-	// a wide range of values in a concise space.
-	private static final String IDENTIFIER_FORMAT = "%06x";
 	private static final AtomicInteger identifierAtomicInteger = new AtomicInteger();
 
 	private Socket socket = null;
@@ -83,9 +80,11 @@ public class Client implements Closeable {
 
 		synchronized (identifierAtomicInteger) {
 			if (connected()) {
+				// Format REQ and RES identifiers as 6 hexadecimal digits, zero padded, to cover
+				// a wide range of values in a concise space.
 				final int identifier = identifierAtomicInteger.getAndIncrement();
-				printWriter.format("REQ " + IDENTIFIER_FORMAT + " %s\r\n", identifier, amcpCommand.trim());
-				final String amcpResponsePrefix = "RES " + IDENTIFIER_FORMAT + " ".formatted(identifier);
+				printWriter.format("REQ %06x %s\r\n", identifier, amcpCommand.trim());
+				final String amcpResponsePrefix = "RES %06x ".formatted(identifier);
 
 				do {
 					try {
@@ -99,6 +98,8 @@ public class Client implements Closeable {
 			}
 		}
 
+		System.out.println("Command [%s], response [%s]".formatted(amcpCommand, amcpResponse));
+		
 		return amcpResponse;
 	}
 
