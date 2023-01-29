@@ -76,4 +76,5 @@ Several settings can be configured at the command line;
 ## Web UI
 To use the control app, open your web browser and browse to;
 * [http://localhost:8080/](http://localhost:8080/)
+
 ... to see some details of the app's internal state and a link to toggle the Left tab.
