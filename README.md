@@ -68,7 +68,7 @@ Several settings can be configured at the command line;
 | Setting              | CLI option            | Default value | Notes                                             |
 | -------------------- | --------------------- | ------------- | ------------------------------------------------- |
 | CasparCG Server host | --casparCGServer.host | localhost     | use *null* for console output                     | 
-| CasparCG Server host | --casparCGServer.port | 5250          |                                                   |
+| CasparCG Server port | --casparCGServer.port | 5250          |                                                   |
 | Left tab text prefix | --leftTab.textPrefix  | 'BBC News'    | Use single quotes around values containing spaces |
 ### Examples
 * The CasparCG Server host can be specified like this;
