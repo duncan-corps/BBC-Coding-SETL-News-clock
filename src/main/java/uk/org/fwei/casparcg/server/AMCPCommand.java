@@ -1,5 +1,12 @@
 package uk.org.fwei.casparcg.server;
 
+/**
+ * Utility class for assembling valid AMCP Command {@link String}s using
+ * supplied data. May merge into {@link Client}, facilitating cleaner client
+ * code, though that would complicate unit testing.
+ * 
+ * @author dpc
+ */
 public class AMCPCommand {
 
 	private static StringBuilder cg(final int channel, final Integer layer) {

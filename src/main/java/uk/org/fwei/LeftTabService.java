@@ -14,6 +14,15 @@ import org.springframework.stereotype.Component;
 import uk.org.fwei.casparcg.server.AMCPCommand;
 import uk.org.fwei.casparcg.server.Client;
 
+/**
+ * Encapsulates the defined configuration, state, and operations of the <b>Left
+ * tab</b>. As soon as this {@link Component} has been constructed, it will send
+ * <b>CG ADD</b> and <b>CG INVOKE</b> AMCP commands. Every second, checks
+ * whether the time (<b>HH:MM</b>) portion should be changed, and sends a new
+ * <b>CG INVOKE</b> if it has.
+ * 
+ * @author dpc
+ */
 @Component
 public class LeftTabService {
 
@@ -54,6 +63,7 @@ public class LeftTabService {
 	}
 
 	public String invoke() {
+		// TODO DPC:DPC Check state to decide whether to include the text
 		final String method = "leftTab('%s', '%s %s')".formatted(state.get(), textPrefix, textSuffix.get());
 		final String amcpCommand = AMCPCommand.cgInvoke(channel.get(), cgLayer.get(), method);
 		final String amcpResponse = client.send(amcpCommand);
@@ -71,12 +81,26 @@ public class LeftTabService {
 		return oldV;
 	}
 
+	/**
+	 * Update {@link #state} to the supplied new value (should be "on" or "off"),
+	 * returning the old value for comparison.
+	 * 
+	 * @param newValue
+	 * @return
+	 */
 	public String state(final String newValue) {
 		final String oldValue = getAndSetState(state, newValue);
 
 		return oldValue;
 	}
 
+	/**
+	 * Update {@link #textPrefix} to the supplied new value, returning the old value
+	 * for comparison.
+	 * 
+	 * @param newValue
+	 * @return
+	 */
 	public String textSuffix(final String newValue) {
 		final String oldValue = getAndSetState(textSuffix, newValue);
 
@@ -86,8 +110,9 @@ public class LeftTabService {
 	@Scheduled(initialDelay = ONE_SECOND_IN_MILLISECONDS, fixedDelay = ONE_SECOND_IN_MILLISECONDS)
 	public void scheduled() {
 		final String newTextSuffix = nowString();
-		final String oldTextSuffix = getAndSetState(textSuffix, newTextSuffix);
+		final String oldTextSuffix = textSuffix(newTextSuffix);
 
+		// TODO DPC:DPC Could move this into textSuffix(String)
 		if (!oldTextSuffix.equals(newTextSuffix)) {
 			invoke();
 		}
